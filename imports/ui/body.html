@@ -1,0 +1,93 @@
+<body>
+  <div class="container">
+    <header>
+      <h1>HSDC TT 2016 live scorecard</h1>
+
+      {{>loginButtons}}
+
+	{{#with games}}
+		{{>game}}
+	{{/with}}
+	<a href="https://nxp1-my.sharepoint.com/personal/rahul_maringanti_nxp_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Frahul_maringanti_nxp_com%2FDocuments%2FHSDC%20TT%202016">Click here for full stats and analysis</a>
+        {{#if currentUser}}
+	<form class="new-update">
+          <input type="text" size="80" name="text" placeholder="Type to add update..." />
+	</form>
+	{{/if}}
+    </header>
+    <h3>Latest Updates:</h3>
+    <ul>
+      {{#each tasks}}
+        {{> task}}
+      {{/each}}
+    </ul>
+
+  </div>
+</body>
+
+<template name="game">
+        {{#if currentUser}}
+	<center>
+	 <button class="reset">reset</button>
+	 <button class="serve">toggle serve</button>
+	</center>
+        {{/if}}
+       <table style="width:100%">
+	  <tr>
+		<th>
+	      <form class="player1">
+		{{#if currentUser}}
+		<input type="text" name="text" placeholder={{player1}} />
+		{{else}}
+		    <span class="text" style="font-size:30px">{{player1}}</span>
+		{{/if}}
+		{{#if calculate_serve}}
+		<span class="text" style="font-size:30px"><sup>•</sup></span>
+		{{/if}}
+	      </form>
+		</th>
+		<th>
+	      <form class="player2">
+		{{#if currentUser}}
+		<input type="text" name="text" placeholder={{player2}} />
+		{{else}}
+		    <span class="text" style="font-size:30px">{{player2}}</span>
+		{{/if}}
+		{{#unless calculate_serve}}
+		<span class="text" style="font-size:30px"><sup>•</sup></span>
+		{{/unless}}
+	      </form>
+		</th>
+	  </tr>
+	  <tr>
+	    <td>
+	<center>
+	<span style="font-size:80px">{{score1}}</span>
+        {{#if currentUser}}
+	 <button class="score1inc" style="height:50px;width:50px">+</button>
+	 <button class="score1dec">-</button>
+        {{/if}}
+	<span style="font-size:40px">{{set1}}</span> 
+        {{#if currentUser}}
+	 <button class="set1inc">^</button>
+	 <button class="set1dec">v</button>
+        {{/if}}
+	</center>
+	    </td>
+	    <td>
+	<center>
+	<span style="font-size:40px">{{set2}}</span> 
+        {{#if currentUser}}
+	 <button class="set2inc">^</button>
+	 <button class="set2dec">v</button>
+        {{/if}}
+	<span style="font-size:80px">{{score2}}</span>  </center>
+        {{#if currentUser}}
+	 <button class="score2inc" style="height:50px;width:50px">+</button>
+	 <button class="score2dec">-</button>
+        {{/if}}
+            </td>
+	   </tr>
+	</table> 
+</template>
+
